@@ -16,8 +16,26 @@ function generateTranslation() {
     const outputField = document.getElementById("englishOutput");
     outputField.value = englishOutput.trim();
 
-    // Copy to clipboard
+    // Copy full output automatically
     navigator.clipboard.writeText(outputField.value).then(() => {
+        showTooltip();
+    });
+}
+
+function copyBeforeColon() {
+    const text = document.getElementById("englishOutput").value;
+    const beforeColon = text.split("\n").map(line => line.split(":")[0] + ":").join("\n");
+
+    navigator.clipboard.writeText(beforeColon).then(() => {
+        showTooltip();
+    });
+}
+
+function copyAfterColon() {
+    const text = document.getElementById("englishOutput").value;
+    const afterColon = text.split("\n").map(line => line.split(":")[1].trim()).join("\n");
+
+    navigator.clipboard.writeText(afterColon).then(() => {
         showTooltip();
     });
 }
